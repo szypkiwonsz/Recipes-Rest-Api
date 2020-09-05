@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from drf_writable_nested import WritableNestedModelSerializer, UniqueFieldsMixin
+from rest_framework import serializers
 
 from .models import Recipe, Ingredient, Food, Step
 
@@ -19,7 +19,6 @@ class FoodSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
 
 
 class StepSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
-
     class Meta:
         model = Step
         fields = '__all__'
