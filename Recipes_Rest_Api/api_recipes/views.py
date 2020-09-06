@@ -16,24 +16,27 @@ class IsAuthenticatedOrGet(IsAuthenticated):
 class CustomModelViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'head', 'patch', 'options', 'delete']
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticatedOrGet]
 
 
 class RecipeViewSet(CustomModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+    permission_classes = [IsAuthenticatedOrGet]
 
 
 class StepViewSet(CustomModelViewSet):
     queryset = Step.objects.all()
     serializer_class = StepSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class FoodViewSet(CustomModelViewSet):
     queryset = Food.objects.all()
     serializer_class = FoodSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class IngredientViewSet(CustomModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+    permission_classes = [IsAuthenticated]
