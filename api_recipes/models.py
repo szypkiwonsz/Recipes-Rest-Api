@@ -55,6 +55,7 @@ class Recipe(models.Model):
     difficulty = models.CharField(max_length=6, choices=DIFFICULTY_CHOICES)
     rating = models.CharField(max_length=1, choices=RATING_CHOICES, blank=True, default=0)
     steps = models.ManyToManyField(Step)
+    date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
