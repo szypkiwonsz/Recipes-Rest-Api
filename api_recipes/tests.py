@@ -1,5 +1,8 @@
 import json
+from datetime import datetime
+from unittest import mock
 
+import pytz
 from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
@@ -65,6 +68,7 @@ class TestRecipeViewSet(APITestCase):
             "preparation_time": 1,
             "difficulty": "EASY",
             "rating": "",
+            "date_posted": '2018-04-04T00:00:00Z',
             "description": "Nice recipe."
         }]
         self.recipe_created = {
@@ -93,11 +97,14 @@ class TestRecipeViewSet(APITestCase):
             "preparation_time": 1,
             "difficulty": "EASY",
             "rating": "",
+            "date_posted": "2018-04-04T00:00:00Z",
             "description": "Nice recipe."
         }
 
     def post_recipe(self):
-        self.client.post(self.list_url, format='json', data=self.recipe)
+        mocked = datetime(2018, 4, 4, 0, 0, 0, tzinfo=pytz.utc)
+        with mock.patch('django.utils.timezone.now', mock.Mock(return_value=mocked)):
+            self.client.post(self.list_url, format='json', data=self.recipe)
 
     def api_authentication(self):
         self.client.credentials(HTTP_AUTHORIZATION='TOKEN ' + self.token.key)
@@ -116,7 +123,9 @@ class TestRecipeViewSet(APITestCase):
         self.assertEquals(json.loads(response.content), self.recipes_created)
 
     def test_recipe_list_post_authenticated(self):
-        response = self.client.post(self.list_url, format='json', data=self.recipe)
+        mocked = datetime(2018, 4, 4, 0, 0, 0, tzinfo=pytz.utc)
+        with mock.patch('django.utils.timezone.now', mock.Mock(return_value=mocked)):
+            response = self.client.post(self.list_url, format='json', data=self.recipe)
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
         self.assertEquals(json.loads(response.content), self.recipe_created)
 
@@ -246,6 +255,7 @@ class TestRecipeViewSet(APITestCase):
             "preparation_time": 1,
             "difficulty": "EASY",
             "rating": "",
+            "date_posted": "2018-04-04T00:00:00Z",
             "description": "Nice recipe."
         }
         response = self.client.patch(self.detail_url, format='json', data=recipe_one_field)
@@ -294,6 +304,7 @@ class TestRecipeViewSet(APITestCase):
             "preparation_time": 1,
             "difficulty": "EASY",
             "rating": "",
+            "date_posted": "2018-04-04T00:00:00Z",
             "description": "Nice recipe."
         }
         response = self.client.patch(self.detail_url, format='json', data=ingredient_new_name)
@@ -361,6 +372,7 @@ class TestRecipeViewSet(APITestCase):
             "preparation_time": 1,
             "difficulty": "EASY",
             "rating": "",
+            "date_posted": "2018-04-04T00:00:00Z",
             "description": "Nice recipe."
         }
         response = self.client.patch(self.detail_url, format='json', data=ingredient_new)
@@ -409,6 +421,7 @@ class TestRecipeViewSet(APITestCase):
             "preparation_time": 1,
             "difficulty": "EASY",
             "rating": "",
+            "date_posted": "2018-04-04T00:00:00Z",
             "description": "Nice recipe."
         }
         response = self.client.patch(self.detail_url, format='json', data=recipe_one_field)
@@ -452,6 +465,7 @@ class TestRecipeViewSet(APITestCase):
             "preparation_time": 1,
             "difficulty": "EASY",
             "rating": "",
+            "date_posted": "2018-04-04T00:00:00Z",
             "description": "Nice recipe."
         }
         response = self.client.patch(self.detail_url, format='json', data=step_new_name)
@@ -504,6 +518,7 @@ class TestRecipeViewSet(APITestCase):
             "preparation_time": 1,
             "difficulty": "EASY",
             "rating": "",
+            "date_posted": "2018-04-04T00:00:00Z",
             "description": "Nice recipe."
         }
         response = self.client.patch(self.detail_url, format='json', data=step_new)
