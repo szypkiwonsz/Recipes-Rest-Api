@@ -1,4 +1,5 @@
 from django.db import models
+from PIL import Image
 
 
 # Create your models here.
@@ -48,14 +49,24 @@ class Recipe(models.Model):
         ('5', '5')
     )
     name = models.CharField(max_length=100)
+    image = models.ImageField(default='default.png', upload_to='recipes_images')
     description = models.TextField()
     ingredients = models.ManyToManyField(Ingredient)
     portions = models.PositiveIntegerField()
     preparation_time = models.PositiveIntegerField(help_text='Time in minutes.')
     difficulty = models.CharField(max_length=6, choices=DIFFICULTY_CHOICES)
     rating = models.CharField(max_length=1, choices=RATING_CHOICES, blank=True, default=0)
-    steps = models.ManyToManyField(Step)
     date_posted = models.DateTimeField(auto_now_add=True)
+    steps = models.ManyToManyField(Step)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = Image.open(self.image.path)
+        if img.height > 200 or img.width > 200:
+            output_size = (200, 200)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
