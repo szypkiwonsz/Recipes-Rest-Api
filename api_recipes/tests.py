@@ -44,6 +44,7 @@ class TestRecipeViewSet(APITestCase):
         }
         self.recipes_created = [{
             "id": 1,
+            'image': 'http://testserver/media/default.png',
             "ingredients": [
                 {
                     "id": 1,
@@ -73,6 +74,7 @@ class TestRecipeViewSet(APITestCase):
         }]
         self.recipe_created = {
             "id": 1,
+            'image': 'http://testserver/media/default.png',
             "ingredients": [
                 {
                     "id": 1,
@@ -231,6 +233,7 @@ class TestRecipeViewSet(APITestCase):
         }
         recipe_new_name = {
             "id": 1,
+            'image': 'http://testserver/media/default.png',
             "ingredients": [
                 {
                     "id": 1,
@@ -280,6 +283,7 @@ class TestRecipeViewSet(APITestCase):
         }
         new_recipe = {
             "id": 1,
+            'image': 'http://testserver/media/default.png',
             "ingredients": [
                 {
                     "id": 1,
@@ -337,6 +341,7 @@ class TestRecipeViewSet(APITestCase):
         }
         new_recipe = {
             "id": 1,
+            'image': 'http://testserver/media/default.png',
             "ingredients": [
                 {
                     "id": 1,
@@ -397,6 +402,7 @@ class TestRecipeViewSet(APITestCase):
         }
         ingredient_new_name = {
             "id": 1,
+            'image': 'http://testserver/media/default.png',
             "ingredients": [
                 {
                     "id": 1,
@@ -441,6 +447,7 @@ class TestRecipeViewSet(APITestCase):
         }
         new_recipe = {
             "id": 1,
+            'image': 'http://testserver/media/default.png',
             "ingredients": [
                 {
                     "id": 1,
@@ -489,6 +496,7 @@ class TestRecipeViewSet(APITestCase):
         }
         new_recipe = {
             "id": 1,
+            'image': 'http://testserver/media/default.png',
             "ingredients": [
                 {
                     "id": 1,
