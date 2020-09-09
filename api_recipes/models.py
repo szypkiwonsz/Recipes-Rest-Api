@@ -26,13 +26,13 @@ class Ingredient(models.Model):
 
 class Step(models.Model):
     instruction = models.TextField()
-    order = models.IntegerField()
+    order = models.IntegerField(blank=True, default=0)
 
     class Meta:
         ordering = ['order']
 
     def __str__(self):
-        return
+        return f'{self.instruction}'
 
 
 class Recipe(models.Model):
