@@ -48,7 +48,7 @@ class Recipe(models.Model):
         ('4', '4'),
         ('5', '5')
     )
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     image = models.ImageField(default='default.png', upload_to='recipes_images')
     description = models.TextField()
     ingredients = models.ManyToManyField(Ingredient)
