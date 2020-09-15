@@ -50,7 +50,7 @@ class Recipe(models.Model):
     )
     name = models.CharField(max_length=50)
     image = models.ImageField(default='default.png', upload_to='recipes_images')
-    description = models.TextField()
+    description = models.TextField(max_length=500)
     ingredients = models.ManyToManyField(Ingredient)
     portions = models.PositiveIntegerField()
     preparation_time = models.PositiveIntegerField(help_text='Time in minutes.')
