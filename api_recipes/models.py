@@ -25,7 +25,7 @@ class Ingredient(models.Model):
 
 
 class Step(models.Model):
-    instruction = models.TextField()
+    instruction = models.TextField(max_length=500)
     order = models.IntegerField(blank=True, default=0)
 
     class Meta:
