@@ -4,11 +4,11 @@ from PIL import Image
 
 # Create your models here.
 class Food(models.Model):
-    tag = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
     recipe = models.ForeignKey('Recipe', null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.tag
+        return self.name
 
 
 class Ingredient(models.Model):
@@ -21,7 +21,7 @@ class Ingredient(models.Model):
     amount = models.PositiveIntegerField(blank=True, default=0)
 
     def __str__(self):
-        return f'{self.food.tag}, {self.amount}'
+        return f'{self.food.name}, {self.amount}'
 
 
 class Step(models.Model):
