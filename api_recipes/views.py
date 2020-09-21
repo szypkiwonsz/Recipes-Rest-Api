@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Recipe, Step, Food, Ingredient
@@ -23,7 +22,6 @@ class RecipeViewSet(CustomModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     permission_classes = [IsAuthenticatedOrGet]
-    parser_classes = [FormParser, MultiPartParser]
 
 
 class StepViewSet(CustomModelViewSet):
