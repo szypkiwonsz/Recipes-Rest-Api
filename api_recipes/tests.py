@@ -3,7 +3,7 @@ from datetime import datetime
 from unittest import mock
 
 import pytz
-from django.contrib.auth.models import User
+from api_recipes.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.authtoken.models import Token
