@@ -2,8 +2,9 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Recipe, Step, Food, Ingredient
-from .serializers import RecipeSerializer, StepSerializer, FoodSerializer, IngredientSerializer
+from api_recipes.models import Recipe, Step, Food, Ingredient, User
+from api_recipes.serializers import RecipeSerializer, StepSerializer, FoodSerializer, IngredientSerializer, \
+    UserSerializer
 
 
 class IsAuthenticatedOrGet(IsAuthenticated):
@@ -40,3 +41,9 @@ class IngredientViewSet(CustomModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     permission_classes = [IsAuthenticated]
+
+
+class UserViewSet(CustomModelViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    http_method_names = ['post', 'head', 'patch', 'options', 'delete']
