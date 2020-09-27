@@ -19,11 +19,10 @@ from django.urls import path, include, re_path
 from django.views.static import serve
 
 from Recipes_Rest_Api import settings
-from api_recipes.router import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include('api_recipes.urls'))
 ]
 
 if settings.DEBUG:
