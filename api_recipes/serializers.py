@@ -32,15 +32,6 @@ class IngredientSerializer(WritableNestedModelSerializer):
         fields = '__all__'
 
 
-class RecipeSerializer(WritableNestedModelSerializer):
-    ingredients = IngredientSerializer(many=True)
-    steps = StepSerializer(many=True)
-
-    class Meta:
-        model = Recipe
-        fields = '__all__'
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -55,3 +46,13 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+
+class RecipeSerializer(WritableNestedModelSerializer):
+    ingredients = IngredientSerializer(many=True)
+    steps = StepSerializer(many=True)
+    author = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Recipe
+        fields = '__all__'
