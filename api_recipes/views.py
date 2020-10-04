@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -20,9 +21,14 @@ class CustomModelViewSet(viewsets.ModelViewSet):
 
 
 class RecipeViewSet(CustomModelViewSet):
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.all().order_by('-date_posted')
     serializer_class = RecipeSerializer
     permission_classes = [IsAuthenticatedOrGet]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['author__username']
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 
 class StepViewSet(CustomModelViewSet):
