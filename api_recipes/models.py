@@ -1,5 +1,7 @@
-from django.db import models
 from PIL import Image
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.utils.translation import gettext as _
 
 
 # Create your models here.
@@ -70,3 +72,9 @@ class Recipe(models.Model):
             output_size = (200, 200)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+class User(AbstractUser):
+    email = models.EmailField(unique=True, error_messages={
+        'unique': _('A user with that email already exists.')
+    })
