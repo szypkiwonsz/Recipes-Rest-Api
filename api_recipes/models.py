@@ -5,6 +5,12 @@ from django.utils.translation import gettext as _
 
 
 # Create your models here.
+class User(AbstractUser):
+    email = models.EmailField(unique=True, error_messages={
+        'unique': _('A user with that email already exists.')
+    })
+
+
 class Food(models.Model):
     name = models.CharField(max_length=20)
     recipe = models.ForeignKey('Recipe', null=True, blank=True, on_delete=models.SET_NULL)
@@ -60,6 +66,7 @@ class Recipe(models.Model):
     rating = models.CharField(max_length=1, choices=RATING_CHOICES, blank=True, default=0)
     date_posted = models.DateTimeField(auto_now_add=True)
     steps = models.ManyToManyField(Step)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -72,9 +79,3 @@ class Recipe(models.Model):
             output_size = (200, 200)
             img.thumbnail(output_size)
             img.save(self.image.path)
-
-
-class User(AbstractUser):
-    email = models.EmailField(unique=True, error_messages={
-        'unique': _('A user with that email already exists.')
-    })
