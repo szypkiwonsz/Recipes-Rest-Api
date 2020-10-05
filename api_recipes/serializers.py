@@ -39,6 +39,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}, 'required': True}
 
     def create(self, validated_data):
+        # Function needed to properly hash the password.
         user = User(
             email=validated_data['email'],
             username=validated_data['username']
