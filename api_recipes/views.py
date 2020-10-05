@@ -1,14 +1,42 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, BasePermission
 
 from api_recipes.models import Recipe, Step, Food, Ingredient, User
 from api_recipes.serializers import RecipeSerializer, StepSerializer, FoodSerializer, IngredientSerializer, \
     UserSerializer
 
 
+class IsOwnerOrGet(BasePermission):
+    """
+    The inheriting class needed for authorization of an object (edit and detail page).
+
+    UNAUTHORIZED -> GET
+    AUTHORIZED (NOT AUTHOR) -> GET
+    AUTHENTICATED (AUTHOR) -> ALL
+    SUPERUSER -> ALL
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if request.method == 'GET':
+            return True
+        if request.user:
+            if request.user.is_superuser:
+                return True
+            else:
+                return obj.author == request.user
+
+
 class IsAuthenticatedOrGet(IsAuthenticated):
+    """
+    The inheriting class needed for authentication of ViewSet.
+
+    UNAUTHENTICATED -> GET
+    AUTHENTICATED -> GET, POST
+    SUPERUSER -> ALL
+    """
+
     def has_permission(self, request, view):
         if request.method == 'GET':
             return True
@@ -23,7 +51,7 @@ class CustomModelViewSet(viewsets.ModelViewSet):
 class RecipeViewSet(CustomModelViewSet):
     queryset = Recipe.objects.all().order_by('-date_posted')
     serializer_class = RecipeSerializer
-    permission_classes = [IsAuthenticatedOrGet]
+    permission_classes = [IsAuthenticatedOrGet, IsOwnerOrGet]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['author__username']
 
