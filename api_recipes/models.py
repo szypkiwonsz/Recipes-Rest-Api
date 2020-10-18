@@ -31,7 +31,7 @@ class Ingredient(models.Model):
         ('PINCH', 'PINCH')
     )
     food = models.ForeignKey(Food, on_delete=models.PROTECT)
-    unit = models.CharField(max_length=5, choices=UNIT_CHOICES)
+    unit = models.CharField(max_length=10, choices=UNIT_CHOICES)
     amount = models.PositiveIntegerField(blank=True, default=0)
 
     def __str__(self):
