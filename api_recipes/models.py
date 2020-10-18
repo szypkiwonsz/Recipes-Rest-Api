@@ -22,7 +22,13 @@ class Food(models.Model):
 class Ingredient(models.Model):
     UNIT_CHOICES = (
         ('PIECE', 'PIECE'),
-        ('GRAM', 'GRAM')
+        ('GRAM', 'GRAM'),
+        ('LITER', 'LITER'),
+        ('SPOON', 'SPOON'),
+        ('TEASPOON', 'TEASPOON'),
+        ('MILLILITER', 'MILLILITER'),
+        ('BUNCH', 'BUNCH'),
+        ('PINCH', 'PINCH')
     )
     food = models.ForeignKey(Food, on_delete=models.PROTECT)
     unit = models.CharField(max_length=5, choices=UNIT_CHOICES)
