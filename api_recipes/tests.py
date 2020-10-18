@@ -20,87 +20,97 @@ class TestRecipeViewSet(APITestCase):
         self.token = Token.objects.create(user=self.user)
         self.api_authentication()
         self.recipe = {
-            "ingredients": [
+            'ingredients': [
                 {
-                    "food": {
-                        "name": "Tomato"
+                    'food': {
+                        'name': 'Tomato'
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "instruction": "Dice the tomato.",
-                    "order": 1
+                    'instruction': 'Dice the tomato.',
+                    'order': 1
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "description": "Nice recipe."
+            'name': 'Salad',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'description': 'Nice recipe.'
         }
         self.recipes_created = [{
-            "id": 1,
-            'image': 'http://testserver/media/default.png',
-            "ingredients": [
+            'id': 1,
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Tomato",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Tomato',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the tomato.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the tomato.',
+                    'order': 1
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "date_posted": '2018-04-04T00:00:00Z',
-            "description": "Nice recipe."
+            'author': {
+                'id': 1,
+                'username': 'username',
+                'email': ''
+            },
+            'name': 'Salad',
+            'image': 'http://testserver/media/default.png',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'date_posted': '2018-04-04T00:00:00Z',
+            'description': 'Nice recipe.'
         }]
         self.recipe_created = {
-            "id": 1,
-            'image': 'http://testserver/media/default.png',
-            "ingredients": [
+            'id': 1,
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Tomato",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Tomato',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the tomato.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the tomato.',
+                    'order': 1
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "date_posted": "2018-04-04T00:00:00Z",
-            "description": "Nice recipe."
+            'author': {
+                'id': 1,
+                'username': 'username',
+                'email': ''
+            },
+            'name': 'Salad',
+            'image': 'http://testserver/media/default.png',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'date_posted': '2018-04-04T00:00:00Z',
+            'description': 'Nice recipe.'
         }
 
     def post_recipe(self):
@@ -143,26 +153,26 @@ class TestRecipeViewSet(APITestCase):
     def test_recipe_list_post_authenticated_no_data(self):
         recipe_no_data = {}
         response_message = {
-            "ingredients": [
-                "This field is required."
+            'ingredients': [
+                'This field is required.'
             ],
-            "steps": [
-                "This field is required."
+            'steps': [
+                'This field is required.'
             ],
-            "name": [
-                "This field is required."
+            'name': [
+                'This field is required.'
             ],
-            "portions": [
-                "This field is required."
+            'portions': [
+                'This field is required.'
             ],
-            "preparation_time": [
-                "This field is required."
+            'preparation_time': [
+                'This field is required.'
             ],
-            "difficulty": [
-                "This field is required."
+            'difficulty': [
+                'This field is required.'
             ],
-            "description": [
-                "This field is required."
+            'description': [
+                'This field is required.'
             ]
         }
         response = self.client.post(self.list_url, format='json', data=recipe_no_data)
@@ -171,32 +181,32 @@ class TestRecipeViewSet(APITestCase):
 
     def test_recipe_list_post_authenticated_no_foods_data(self):
         recipe_no_foods = {
-            "ingredients": [
+            'ingredients': [
                 {
-                    "food": {},
-                    "unit": "PIECE",
-                    "amount": 1
+                    'food': {},
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "instruction": "Dice the tomato.",
-                    "order": 1
+                    'instruction': 'Dice the tomato.',
+                    'order': 1
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "description": "Nice recipe."
+            'name': 'Salad',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'description': 'Nice recipe.'
         }
         response_message = {
-            "ingredients": [
+            'ingredients': [
                 {
-                    "food": {
-                        "name": [
-                            "This field is required."
+                    'food': {
+                        'name': [
+                            'This field is required.'
                         ]
                     }
                 }
@@ -229,37 +239,42 @@ class TestRecipeViewSet(APITestCase):
     def test_recipe_detail_patch_authenticated_name(self):
         self.post_recipe()
         recipe_one_field = {
-            "name": "New Salad"
+            'name': 'New Salad'
         }
         recipe_new_name = {
-            "id": 1,
+            'id': 1,
             'image': 'http://testserver/media/default.png',
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Tomato",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Tomato',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the tomato.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the tomato.',
+                    'order': 1
                 }
             ],
-            "name": "New Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "date_posted": "2018-04-04T00:00:00Z",
-            "description": "Nice recipe."
+            'author': {
+                'id': 1,
+                'username': 'username',
+                'email': ''
+            },
+            'name': 'New Salad',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'date_posted': '2018-04-04T00:00:00Z',
+            'description': 'Nice recipe.'
         }
         response = self.client.patch(self.detail_url, format='json', data=recipe_one_field)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
@@ -268,48 +283,53 @@ class TestRecipeViewSet(APITestCase):
     def test_recipe_detail_patch_authenticated_ingredient(self):
         self.post_recipe()
         ingredient_new_name = {
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Strawberry",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Strawberry',
+                        'recipe': None
                     },
-                    "unit": "GRAM",
-                    "amount": 1
+                    'unit': 'GRAM',
+                    'amount': 1
                 }
             ],
         }
         new_recipe = {
-            "id": 1,
+            'id': 1,
             'image': 'http://testserver/media/default.png',
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Strawberry",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Strawberry',
+                        'recipe': None
                     },
-                    "unit": "GRAM",
-                    "amount": 1
+                    'unit': 'GRAM',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the tomato.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the tomato.',
+                    'order': 1
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "date_posted": "2018-04-04T00:00:00Z",
-            "description": "Nice recipe."
+            'author': {
+                'id': 1,
+                'username': 'username',
+                'email': ''
+            },
+            'name': 'Salad',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'date_posted': '2018-04-04T00:00:00Z',
+            'description': 'Nice recipe.'
         }
         response = self.client.patch(self.detail_url, format='json', data=ingredient_new_name)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
@@ -318,67 +338,72 @@ class TestRecipeViewSet(APITestCase):
     def test_recipe_detail_patch_authenticated_new_ingredient(self):
         self.post_recipe()
         ingredient_new = {
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Strawberry",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Strawberry',
+                        'recipe': None
                     },
-                    "unit": "GRAM",
-                    "amount": 1
+                    'unit': 'GRAM',
+                    'amount': 1
                 },
                 {
-                    "food": {
-                        "name": "Salad",
-                        "recipe": None
+                    'food': {
+                        'name': 'Salad',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 2
+                    'unit': 'PIECE',
+                    'amount': 2
                 }
             ],
         }
         new_recipe = {
-            "id": 1,
+            'id': 1,
             'image': 'http://testserver/media/default.png',
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Strawberry",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Strawberry',
+                        'recipe': None
                     },
-                    "unit": "GRAM",
-                    "amount": 1
+                    'unit': 'GRAM',
+                    'amount': 1
                 },
                 {
-                    "id": 2,
-                    "food": {
-                        "id": 2,
-                        "name": "Salad",
-                        "recipe": None
+                    'id': 2,
+                    'food': {
+                        'id': 2,
+                        'name': 'Salad',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 2
+                    'unit': 'PIECE',
+                    'amount': 2
 
                 }
             ],
-            "steps": [
+            'author': {
+                'id': 1,
+                'username': 'username',
+                'email': ''
+            },
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the tomato.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the tomato.',
+                    'order': 1
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "date_posted": "2018-04-04T00:00:00Z",
-            "description": "Nice recipe."
+            'name': 'Salad',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'date_posted': '2018-04-04T00:00:00Z',
+            'description': 'Nice recipe.'
         }
         response = self.client.patch(self.detail_url, format='json', data=ingredient_new)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
@@ -387,48 +412,53 @@ class TestRecipeViewSet(APITestCase):
     def test_recipe_detail_patch_authenticated_food(self):
         self.post_recipe()
         recipe_one_field = {
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Tomato",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Tomato',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
         }
         ingredient_new_name = {
-            "id": 1,
+            'id': 1,
             'image': 'http://testserver/media/default.png',
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Tomato",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Tomato',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the tomato.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the tomato.',
+                    'order': 1
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "date_posted": "2018-04-04T00:00:00Z",
-            "description": "Nice recipe."
+            'author': {
+                'id': 1,
+                'username': 'username',
+                'email': ''
+            },
+            'name': 'Salad',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'date_posted': '2018-04-04T00:00:00Z',
+            'description': 'Nice recipe.'
         }
         response = self.client.patch(self.detail_url, format='json', data=recipe_one_field)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
@@ -437,43 +467,48 @@ class TestRecipeViewSet(APITestCase):
     def test_recipe_detail_patch_authenticated_steps(self):
         self.post_recipe()
         step_new_name = {
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the strawberry.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the strawberry.',
+                    'order': 1
                 }
             ],
         }
         new_recipe = {
-            "id": 1,
+            'id': 1,
             'image': 'http://testserver/media/default.png',
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Tomato",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Tomato',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the strawberry.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the strawberry.',
+                    'order': 1
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "date_posted": "2018-04-04T00:00:00Z",
-            "description": "Nice recipe."
+            'author': {
+                'id': 1,
+                'username': 'username',
+                'email': ''
+            },
+            'name': 'Salad',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'date_posted': '2018-04-04T00:00:00Z',
+            'description': 'Nice recipe.'
         }
         response = self.client.patch(self.detail_url, format='json', data=step_new_name)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
@@ -482,52 +517,57 @@ class TestRecipeViewSet(APITestCase):
     def test_recipe_detail_patch_authenticated_new_step(self):
         self.post_recipe()
         step_new = {
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the strawberry.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the strawberry.',
+                    'order': 1
                 },
                 {
-                    "instruction": "Dice the tomato.",
-                    "order": 2
+                    'instruction': 'Dice the tomato.',
+                    'order': 2
                 }
             ],
         }
         new_recipe = {
-            "id": 1,
+            'id': 1,
             'image': 'http://testserver/media/default.png',
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Tomato",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Tomato',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
-            "steps": [
+            'steps': [
                 {
-                    "id": 1,
-                    "instruction": "Dice the strawberry.",
-                    "order": 1
+                    'id': 1,
+                    'instruction': 'Dice the strawberry.',
+                    'order': 1
                 },
                 {
-                    "id": 2,
-                    "instruction": "Dice the tomato.",
-                    "order": 2
+                    'id': 2,
+                    'instruction': 'Dice the tomato.',
+                    'order': 2
                 }
             ],
-            "name": "Salad",
-            "portions": 1,
-            "preparation_time": 1,
-            "difficulty": "EASY",
-            "rating": "",
-            "date_posted": "2018-04-04T00:00:00Z",
-            "description": "Nice recipe."
+            'author': {
+                'id': 1,
+                'username': 'username',
+                'email': ''
+            },
+            'name': 'Salad',
+            'portions': 1,
+            'preparation_time': 1,
+            'difficulty': 'EASY',
+            'rating': '',
+            'date_posted': '2018-04-04T00:00:00Z',
+            'description': 'Nice recipe.'
         }
         response = self.client.patch(self.detail_url, format='json', data=step_new)
         self.assertEquals(response.status_code, status.HTTP_200_OK)
@@ -537,16 +577,16 @@ class TestRecipeViewSet(APITestCase):
         self.post_recipe()
         self.client.force_authenticate(user=None)
         recipe_one_field = {
-            "ingredients": [
+            'ingredients': [
                 {
-                    "id": 1,
-                    "food": {
-                        "id": 1,
-                        "name": "Tomato",
-                        "recipe": None
+                    'id': 1,
+                    'food': {
+                        'id': 1,
+                        'name': 'Tomato',
+                        'recipe': None
                     },
-                    "unit": "PIECE",
-                    "amount": 1
+                    'unit': 'PIECE',
+                    'amount': 1
                 }
             ],
         }
