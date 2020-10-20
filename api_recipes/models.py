@@ -5,6 +5,9 @@ from django.utils.translation import gettext as _
 
 
 # Create your models here.
+from easy_thumbnails.fields import ThumbnailerImageField
+
+
 class User(AbstractUser):
     email = models.EmailField(unique=True, error_messages={
         'unique': _('A user with that email already exists.')
@@ -50,6 +53,7 @@ class Step(models.Model):
 
 
 class Recipe(models.Model):
+    CROP_SETTINGS = {'size': (300, 300), 'crop': 'smart'}
     DIFFICULTY_CHOICES = (
         ('EASY', 'EASY'),
         ('MEDIUM', 'MEDIUM'),
@@ -63,7 +67,7 @@ class Recipe(models.Model):
         ('5', '5')
     )
     name = models.CharField(max_length=50)
-    image = models.ImageField(default='default.png', upload_to='recipes_images')
+    image = ThumbnailerImageField(default='default.png', upload_to='recipe_images', resize_source=CROP_SETTINGS)
     description = models.TextField(max_length=500)
     ingredients = models.ManyToManyField(Ingredient)
     portions = models.PositiveIntegerField()
@@ -76,12 +80,3 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        img = Image.open(self.image.path)
-        if img.height > 200 or img.width > 200:
-            output_size = (200, 200)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
