@@ -6,9 +6,6 @@ from api_recipes.views import RecipeViewSet, UserViewSet
 
 router = routers.DefaultRouter()
 router.register('recipes', RecipeViewSet, basename='recipe')
-# router.register('foods', FoodViewSet, basename='food')
-# router.register('ingredients', IngredientViewSet, basename='ingredient')
-# router.register('steps', StepViewSet, basename='steep')
 router.register('users', UserViewSet, basename='user')
 
 urlpatterns = [
