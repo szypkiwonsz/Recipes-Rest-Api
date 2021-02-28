@@ -1,10 +1,7 @@
-from PIL import Image
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext as _
 
-
-# Create your models here.
 from easy_thumbnails.fields import ThumbnailerImageField
 
 
