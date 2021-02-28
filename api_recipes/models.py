@@ -6,20 +6,22 @@ from easy_thumbnails.fields import ThumbnailerImageField
 
 
 class User(AbstractUser):
+    """Inheriting User model with unique EmailField."""
     email = models.EmailField(unique=True, error_messages={
         'unique': _('A user with that email already exists.')
     })
 
 
 class Food(models.Model):
+    """Recipe Food model."""
     name = models.CharField(max_length=20)
-    recipe = models.ForeignKey('Recipe', null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
 
 
 class Ingredient(models.Model):
+    """Food Ingredient model."""
     UNIT_CHOICES = (
         ('PIECE', 'PIECE'),
         ('GRAM', 'GRAM'),
@@ -39,6 +41,7 @@ class Ingredient(models.Model):
 
 
 class Step(models.Model):
+    """Recipe Step model."""
     instruction = models.TextField(max_length=500)
     order = models.IntegerField(blank=True, default=0)
 
@@ -50,7 +53,8 @@ class Step(models.Model):
 
 
 class Recipe(models.Model):
-    CROP_SETTINGS = {'size': (300, 300), 'crop': 'smart'}
+    """Recipe model."""
+    CROP_SETTINGS = {'size': (300, 300), 'crop': 'smart'}  # image settings
     DIFFICULTY_CHOICES = (
         ('EASY', 'EASY'),
         ('MEDIUM', 'MEDIUM'),

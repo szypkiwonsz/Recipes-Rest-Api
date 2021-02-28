@@ -3,11 +3,12 @@ from datetime import datetime
 from unittest import mock
 
 import pytz
-from api_recipes.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
+
+from api_recipes.models import User
 
 
 # Create your tests here.
@@ -49,8 +50,8 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Tomato',
-                        'recipe': None
+                        'name': 'Tomato'
+
                     },
                     'unit': 'PIECE',
                     'amount': 1
@@ -84,8 +85,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Tomato',
-                        'recipe': None
+                        'name': 'Tomato'
                     },
                     'unit': 'PIECE',
                     'amount': 1
@@ -249,8 +249,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Tomato',
-                        'recipe': None
+                        'name': 'Tomato'
                     },
                     'unit': 'PIECE',
                     'amount': 1
@@ -288,8 +287,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Strawberry',
-                        'recipe': None
+                        'name': 'Strawberry'
                     },
                     'unit': 'GRAM',
                     'amount': 1
@@ -304,8 +302,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Strawberry',
-                        'recipe': None
+                        'name': 'Strawberry'
                     },
                     'unit': 'GRAM',
                     'amount': 1
@@ -343,16 +340,14 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Strawberry',
-                        'recipe': None
+                        'name': 'Strawberry'
                     },
                     'unit': 'GRAM',
                     'amount': 1
                 },
                 {
                     'food': {
-                        'name': 'Salad',
-                        'recipe': None
+                        'name': 'Salad'
                     },
                     'unit': 'PIECE',
                     'amount': 2
@@ -367,8 +362,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Strawberry',
-                        'recipe': None
+                        'name': 'Strawberry'
                     },
                     'unit': 'GRAM',
                     'amount': 1
@@ -377,8 +371,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 2,
                     'food': {
                         'id': 2,
-                        'name': 'Salad',
-                        'recipe': None
+                        'name': 'Salad'
                     },
                     'unit': 'PIECE',
                     'amount': 2
@@ -417,8 +410,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Tomato',
-                        'recipe': None
+                        'name': 'Tomato'
                     },
                     'unit': 'PIECE',
                     'amount': 1
@@ -433,8 +425,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Tomato',
-                        'recipe': None
+                        'name': 'Tomato'
                     },
                     'unit': 'PIECE',
                     'amount': 1
@@ -483,8 +474,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Tomato',
-                        'recipe': None
+                        'name': 'Tomato'
                     },
                     'unit': 'PIECE',
                     'amount': 1
@@ -537,8 +527,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Tomato',
-                        'recipe': None
+                        'name': 'Tomato'
                     },
                     'unit': 'PIECE',
                     'amount': 1
@@ -582,8 +571,7 @@ class TestRecipeViewSet(APITestCase):
                     'id': 1,
                     'food': {
                         'id': 1,
-                        'name': 'Tomato',
-                        'recipe': None
+                        'name': 'Tomato'
                     },
                     'unit': 'PIECE',
                     'amount': 1
