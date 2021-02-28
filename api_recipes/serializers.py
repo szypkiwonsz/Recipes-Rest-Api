@@ -5,6 +5,7 @@ from api_recipes.models import Recipe, Ingredient, Food, Step, User
 
 
 class FoodSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
+    """Food serializer."""
 
     def create(self, validated_data):
         obj, created = Food.objects.get_or_create(**validated_data)
@@ -19,12 +20,15 @@ class FoodSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
 
 
 class StepSerializer(UniqueFieldsMixin, serializers.ModelSerializer):
+    """Recipe step serializer."""
+
     class Meta:
         model = Step
         fields = '__all__'
 
 
 class IngredientSerializer(WritableNestedModelSerializer):
+    """Food ingredient serializer."""
     food = FoodSerializer()
 
     class Meta:
@@ -33,6 +37,8 @@ class IngredientSerializer(WritableNestedModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """User serializer."""
+
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')
@@ -50,6 +56,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(WritableNestedModelSerializer):
+    """Recipe serializer."""
     ingredients = IngredientSerializer(many=True)
     steps = StepSerializer(many=True)
     author = UserSerializer(read_only=True)
