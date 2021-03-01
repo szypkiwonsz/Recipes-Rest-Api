@@ -48,7 +48,7 @@ KEY: Authorization VALUE: Token USER_TOKEN
 Manage recipe
 
 ```
-/api/recipes/1/ (GET, PATCH, DELETE) -> to edit or delete recipe you have to set up headers like bellow:
+/api/recipes/1/ (GET, PATCH, DELETE) -> to manage recipe you have to set up headers like bellow:
 
 KEY: Content-Type VALUE: application/json
 KEY: Authorization VALUE: Token USER_TOKEN
